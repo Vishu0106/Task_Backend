@@ -8,7 +8,10 @@ import TaskRoutes from './src/routes/tasks.routes.js';
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://task-frontend-eta-seven.vercel.app/',
+    credentials: true
+}))
 
 app.use(bodyParser.json())
 app.use(cookieParser())

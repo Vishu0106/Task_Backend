@@ -27,7 +27,7 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-
+    console.log('hello',email,password)
   if (!email || !password) {
     return res.status(400).json({ message: 'Please enter all fields' });
   }
@@ -40,7 +40,6 @@ const loginUser = async (req, res) => {
 
       res.cookie('token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
         maxAge: 24 * 60 * 60 * 1000,
       });
 
