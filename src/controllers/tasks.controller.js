@@ -110,4 +110,21 @@ const getDashboardStatistics = async (req, res) => {
   }
 };
 
-export { createTask, getAllTasks, updateTaskStatus, getDashboardStatistics };
+const deleteTask = async (req, res) => {
+    const { id } = req.query; // Get task ID from query parameter
+    if (!id) {
+      return res.status(400).json({ message: 'Task ID is required' });
+    }
+  
+    try {
+      const task = await Task.findByIdAndDelete(id); // Find and delete the task by ID
+      if (!task) {
+        return res.status(404).json({ message: 'Task not found' });
+      }
+      res.status(200).json({ message: 'Task deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+export { createTask, getAllTasks, updateTaskStatus, getDashboardStatistics, deleteTask };
